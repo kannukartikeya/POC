@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Probability Of Default Modelling</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<link rel="stylesheet" href="/bootstrap.min.css" media="screen"/>
+</head>
+<body>
+	<div class="container">
+      <div class="page-header" id="banner">
+        <div class="row">
+          <div class="col-lg-8 col-md-7 col-sm-6">
+            <h1>PDModel History</h1>
+
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Last FICO Range High</th>
+						<th>Last FICO Range Low</th>
+						<th>Revol Util</th>
+						<th>Inq Last 6 Months</th>
+						<th>On Rent</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				    <tr th:each="pdModel : ${pdModels}">
+				    	<td th:text="${pdModel.last_fico_range_high}"></td>
+				    	<td th:text="${pdModel.last_fico_range_low}"></td>
+				    	<td th:text="${pdModel.revol_util}"></td>
+				    	<td th:text="${pdModel.inq_last_6mths}"></td>
+				    	<td th:text="${pdModel.is_rent}"></td>
+				    </tr>
+				</tbody>
+			</table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-7 col-sm-6">
+            <h1>Online PDModelling</h1>
+
+			<form th:action="@{/pdModels}" method="post" enctype="multipart/form-data" class="form-horizontal">
+            	<fieldset>
+            		<div class="form-group">
+	                    <label class="col-lg-3 control-label">Last FICO Range High</label>
+	                    <div class="col-lg-9">
+	                    	<input type="text" class="form-control" name="last_fico_range_high"/>
+	                    </div>
+                	</div>
+            		<div class="form-group">
+	                    <label class="col-lg-3 control-label">Last FICO Range Low</label>
+	                    <div class="col-lg-9">
+	                    	<input type="text" class="form-control" name="last_fico_range_low"/>
+	                    </div>
+                	</div>
+            		<div class="form-group">
+	                    <label class="col-lg-3 control-label">Revol Util</label>
+	                    <div class="col-lg-9">
+	                    	<input type="text" class="form-control" name="revol_util"/>
+	                    </div>
+                	</div>
+                	<div class="form-group">
+	                    <label class="col-lg-3 control-label">Inq Last 6 Months</label>
+	                    <div class="col-lg-9">
+	                    	<input type="text" class="form-control" name="inq_last_6mths"/>
+	                    </div>
+                	</div>
+                	           		<div class="form-group">
+	                    <label class="col-lg-3 control-label">On Rent</label>
+	                    <div class="col-lg-9">
+	                    	<input type="checkbox" class="form-control" name="is_rent"/>
+	                    </div>
+                	</div>
+                	
+            		<div class="form-group">
+                		<div class="col-lg-12 col-lg-offset-3">
+                			<button type="submit" class="btn btn-primary" name="button">Calculate</button>
+                		</div>
+                	</div>
+                </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</body>
+</html>
