@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.JsonObject;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 import poc.pbdefault.domain.Factors;
 import poc.pbdefault.domain.PDModel;
 import poc.pbdefault.mqtt.MqttPublishSubscribeUtility;
 import poc.pbdefault.repositories.FactorRepository;
 import poc.pbdefault.repositories.PDModelRepository;
+import poc.pbdefault.service.DominoService;
 
 @Controller
 @PreAuthorize("hasAuthority('USER')")
@@ -61,6 +63,12 @@ public class PDModelController {
 		pdModel.setIs_rent(is_rent);
 		
 		repository.save(pdModel);
+		try {
+			DominoService.getPBDetails(pdModel);
+		} catch (UnirestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 
 		
