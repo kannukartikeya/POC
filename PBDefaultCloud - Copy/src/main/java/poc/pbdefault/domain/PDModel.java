@@ -12,7 +12,7 @@ public class PDModel {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@Size(min=2, max=30, message = "Username size should be in the range [2...30]")
+	//@Size(min=2, max=30, message = "Username size should be in the range [2...30]")
 	private int last_fico_range_high;
 	private int last_fico_range_low;
 	private double revol_util;
@@ -20,6 +20,26 @@ public class PDModel {
 	private boolean is_rent;
 	private String score;
 	private String prob_default;
+	private double loan_amt;
+	private double annual_inc;
+	
+	public double getLoan_amt() {
+		return loan_amt;
+	}
+
+	public void setLoan_amt(double loan_amt) {
+		this.loan_amt = loan_amt;
+	}
+
+	public double getAnnual_inc() {
+		return annual_inc;
+	}
+
+	public void setAnnual_inc(double annual_inc) {
+		this.annual_inc = annual_inc;
+	}
+
+
 
 
 	
@@ -46,7 +66,7 @@ public class PDModel {
 		super();
 	}
 
-	public PDModel(int last_fico_range_high, int last_fico_range_low, double  revol_util,int inq_last_6mths,boolean is_rent)
+	public PDModel(int last_fico_range_high, int last_fico_range_low, double  revol_util,int inq_last_6mths,boolean is_rent,double loan_amt,double annual_inc)
 	{
 		super();
 		this.last_fico_range_high = last_fico_range_high;
@@ -54,10 +74,12 @@ public class PDModel {
 		this.revol_util = revol_util;
 		this.inq_last_6mths = inq_last_6mths;
 		this.is_rent=is_rent;
+		this.loan_amt = loan_amt;
+		this.annual_inc = annual_inc;
 	}
 
 	
-	public PDModel(int last_fico_range_high, int last_fico_range_low, double  revol_util,int inq_last_6mths,boolean is_rent,String score,String pd)
+	public PDModel(int last_fico_range_high, int last_fico_range_low, double  revol_util,int inq_last_6mths,boolean is_rent,String score,String pd, double loan_amt,double annual_inc)
 	{
 		super();
 		this.last_fico_range_high = last_fico_range_high;
@@ -67,6 +89,8 @@ public class PDModel {
 		this.is_rent=is_rent;
 		this.score=score;
 		this.prob_default = pd;
+		this.loan_amt = loan_amt;
+		this.annual_inc = annual_inc;
 	}
 
 

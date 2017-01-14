@@ -10,8 +10,8 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import poc.pbdefault.domain.PDModel;
      
     public class DominoService {
-/*   	public static void main(String[] args) throws UnirestException {
-    	PDModel pdmodel = new PDModel(10,10,1.2,2,new Boolean(true));
+/*  	public static void main(String[] args) throws UnirestException {
+    	PDModel pdmodel = new PDModel(10,10,1.2,2,new Boolean(true),2000.0,2000.0);
     	getPBDetails(pdmodel);
     	}*/
         public static void getPBDetails(PDModel pdModel) throws UnirestException {
@@ -20,11 +20,13 @@ import poc.pbdefault.domain.PDModel;
                 .header("Content-Type", "application/json")
                 .body(new JsonNode("{\"parameters\": [ 5.6, 3.2, 1.7,0.8]}"))
                 .asJson();*/
-        	String requestbody = "{\"parameters\": [" + pdModel.getLast_fico_range_low() +","+
-					  pdModel.getLast_fico_range_high() +","+
+        	String requestbody = "{\"parameters\": [" + pdModel.getLast_fico_range_high() +","+
+					  pdModel.getLast_fico_range_low() +","+
 					  pdModel.getRevol_util()+","+
 					  pdModel.getInq_last_6mths() +","+
-					  pdModel.isIs_rent()+"]}";
+					  pdModel.isIs_rent() +","+
+					  pdModel.getLoan_amt() +","+
+					  pdModel.getAnnual_inc()+"]}";
         	
         	System.out.println("Request body is "  + requestbody);
 /*            HttpResponse<JsonNode> response = Unirest.post("https://app.dominodatalab.com/v1/kannu/defaulter/endpoint")

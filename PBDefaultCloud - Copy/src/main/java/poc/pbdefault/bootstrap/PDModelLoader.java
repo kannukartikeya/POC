@@ -41,7 +41,8 @@ public class PDModelLoader implements ApplicationListener<ContextRefreshedEvent>
     	factorRepository.save(device4);*/
 
     	List<PDModel> pdModels = new LinkedList<PDModel>();
-    	pdModels.add(new PDModel(100,100,83.7,1,true,"Defaulter","0.80")); 
+    	pdModels.add(new PDModel(850,750,2,1,true,"A","0.002",1000,100000)); 
+    	//pdModels.add(new PDModel(850,750,2,6,true,"C","0.654",100000,1000)); 
     	pdModelRepository.save(pdModels);
     }
 }

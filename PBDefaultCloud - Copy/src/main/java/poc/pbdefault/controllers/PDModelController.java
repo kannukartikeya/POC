@@ -32,20 +32,6 @@ public class PDModelController {
 	@Autowired
 	FactorRepository deviceRepository;
 
-	@RequestMapping("/room/{id}")
-	public String room(@PathVariable Long id, Model model) {
-		model.addAttribute("room", repository.findOne(id));
-		model.addAttribute("devices", deviceRepository.findAll());
-		return "room";
-	}
-	
-	@RequestMapping("/device/{id}")
-	public String device(@PathVariable Long id, Model model) {
-		//model.addAttribute("developer", repository.findOne(id));
-		model.addAttribute("device", deviceRepository.findOne(id));
-		return "device";
-	}
-	
 
 	@RequestMapping(value="/pdModels",method=RequestMethod.GET)
 	public String pdList(Model model) {
@@ -57,17 +43,19 @@ public class PDModelController {
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public String pdListRoot(Model model) {
 		model.addAttribute("pdModels", repository.findAll());
-		return "index";
+		return "pdModels";
 	}
 	
 	
 	@RequestMapping(value="/pdModels",method=RequestMethod.POST)
-	public String roomAdd(@RequestParam int last_fico_range_high, @RequestParam int last_fico_range_low,@RequestParam float revol_util, @RequestParam int inq_last_6mths, @RequestParam(value="is_rent", defaultValue="false")  boolean is_rent, Model model) {
+	public String roomAdd(@RequestParam int last_fico_range_high, @RequestParam int last_fico_range_low,@RequestParam float revol_util, @RequestParam int inq_last_6mths, @RequestParam(value="is_rent", defaultValue="false")  boolean is_rent,double loan_amt,double annual_inc, Model model) {
 		PDModel pdModel = new PDModel();
 		pdModel.setLast_fico_range_high(last_fico_range_high);
 		pdModel.setLast_fico_range_low(last_fico_range_low);
 		pdModel.setRevol_util(revol_util);
 		pdModel.setInq_last_6mths(inq_last_6mths);
+		pdModel.setLoan_amt(loan_amt);
+		pdModel.setAnnual_inc(annual_inc);
 		if(is_rent)
 		pdModel.setIs_rent(is_rent);
 		else 
@@ -88,12 +76,14 @@ public class PDModelController {
 	}
 
 	@RequestMapping(value="/",method=RequestMethod.POST)
-	public String pdModelAdd(@RequestParam int last_fico_range_high, @RequestParam int last_fico_range_low,@RequestParam float revol_util, @RequestParam int inq_last_6mths, @RequestParam(value="is_rent", defaultValue="false")  boolean is_rent, Model model) {
+	public String pdModelAdd(@RequestParam int last_fico_range_high, @RequestParam int last_fico_range_low,@RequestParam float revol_util, @RequestParam int inq_last_6mths, @RequestParam(value="is_rent", defaultValue="false")  boolean is_rent, double loan_amt,double annual_inc,Model model) {
 		PDModel pdModel = new PDModel();
 		pdModel.setLast_fico_range_high(last_fico_range_high);
 		pdModel.setLast_fico_range_low(last_fico_range_low);
 		pdModel.setRevol_util(revol_util);
 		pdModel.setInq_last_6mths(inq_last_6mths);
+		pdModel.setLoan_amt(loan_amt);
+		pdModel.setAnnual_inc(annual_inc);
 		if(is_rent)
 		pdModel.setIs_rent(is_rent);
 		else 
